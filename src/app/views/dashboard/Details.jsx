@@ -1,201 +1,125 @@
 import { Card, Grid, styled, useTheme, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import MUIDataTable from 'mui-datatables';
+import { SimpleCard } from 'app/components';
 import { Fragment } from 'react';
+import Extracts from './shared/Extracts';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { H2, Paragraph } from 'app/components/Typography';
+import UploadHistory from './shared/UploadHistory';
+import FacilityMetrics from './shared/FacilityMetrics';
+import IndicatorMetrics from './shared/IndicatorMetrics';
 
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-	color: theme.palette.text.primary,
-}));
-
-const LinearProgressWithLabel = (props) => {
-	return (
-		<Box sx={{ display: 'flex', alignItems: 'center' }}>
-			<Box sx={{ width: '100%', mr: 1 }}>
-				<LinearProgress variant="determinate" {...props} />
-			</Box>
-			<Box sx={{ minWidth: 35 }}>
-				<Typography variant="body2" color="text.secondary">{`${Math.round(
-					props.value
-				)}%`}</Typography>
-			</Box>
-		</Box>
-	);
-};
-
-const columns = [
-	{
-		name: 'code',
-		label: 'Code',
-		options: {
-			filter: true,
-			sort: true,
-		},
-	},
-	{
-		name: 'facility',
-		label: 'Facility',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'county',
-		label: 'County',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'subcounty',
-		label: 'Sub-County',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'partner',
-		label: 'Partner',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'docket',
-		label: 'Docket',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'progress',
-		label: 'Progress',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'status',
-		label: 'Status',
-		options: {
-			filter: true,
-			sort: false,
-		},
-		options: {
-			// Custom cell rendering function
-			customBodyRender: (value) => <div style={{ whiteSpace: 'pre-wrap' }}>{value}</div>,
-		},
-	},
-	{
-		name: 'updated',
-		label: 'Updated',
-		options: {
-			filter: true,
-			sort: false,
-		},
-	},
-	{
-		name: 'action',
-		label: '',
-		options: {
-			filter: false,
-			sort: false,
-		},
-	},
-];
-
-const data = [
-	{
-		code: '12331',
-		facility: 'Test Corp',
-		partner: 'Test Corp',
-		county: 'Yonkers',
-		subcounty: 'NY',
-		docket: 'HTS',
-		progress: <LinearProgressWithLabel value={44} />,
-		status: 'Upload in progress',
-		updated: new Date().toDateString(),
-		action: (
-			<StyledIconButton>
-				<AddIcon />
-			</StyledIconButton>
-		),
-	},
-	{
-		code: '12330',
-		facility: 'Test Corp',
-		partner: 'Test Corp',
-		county: 'Hartford',
-		subcounty: 'CT',
-		docket: 'PrEP',
-		progress: <LinearProgressWithLabel value={90} color="error" />,
-		status: 'Resend',
-		updated: new Date().toDateString(),
-		action: (
-			<StyledIconButton>
-				<AddIcon />
-			</StyledIconButton>
-		),
-	},
-	{
-		code: '42331',
-		facility: 'Test Corp',
-		partner: 'Test Corp',
-		subcounty: 'Tampa',
-		county: 'FL',
-		docket: 'CT',
-		progress: <LinearProgressWithLabel value={100} color="success" />,
-		status: 'Processed',
-		updated: new Date().toDateString(),
-		action: (
-			<StyledIconButton>
-				<AddIcon />
-			</StyledIconButton>
-		),
-	},
-	{
-		code: '13983',
-		facility: 'Test Corp',
-		partner: 'Test Corp',
-		county: 'Dallas',
-		subcounty: 'TX',
-		docket: 'MNCH',
-		progress: <LinearProgressWithLabel value={75} />,
-		status: 'Queued For Processing',
-		updated: new Date().toDateString(),
-		action: (
-			<StyledIconButton>
-				<AddIcon />
-			</StyledIconButton>
-		),
-	},
-];
-
-const options = {
-	filterType: 'multiselect',
-	selectableRows: 'none',
-};
 const ContentBox = styled('div')(({ theme }) => ({
 	margin: '30px',
 	[theme.breakpoints.down('sm')]: { margin: '16px' },
 }));
 
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography>{children}</Typography>
+				</Box>
+			)}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `simple-tab-${index}`,
+		'aria-controls': `simple-tabpanel-${index}`,
+	};
+}
+
 const Details = () => {
-	const { palette } = useTheme();
+	const [value, setValue] = React.useState(0);
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
 
 	return (
 		<Fragment>
-			<ContentBox className="analytics">
-				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
-			</ContentBox>
+			<Grid container spacing={3} alignItems="flex-start">
+				{/* <ContentBox className="analytics"> */}
+				<Grid item xs={12} md={12}>
+					<SimpleCard sx={{ width: '100%' }}>
+						<H2>Test Facility</H2>
+						<Paragraph sx={{ m: 0 }}>Code: 14402</Paragraph>
+					</SimpleCard>
+				</Grid>
+				{/* </ContentBox>
+				<ContentBox className="analytics"> */}
+				<Grid item xs={12} md={6} xl={8}>
+					<SimpleCard title="">
+						<Box sx={{ width: '100%' }}>
+							<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+								<Tabs
+									value={value}
+									onChange={handleChange}
+									aria-label="basic tabs example"
+								>
+									<Tab label="NDWH" {...a11yProps(0)} />
+									<Tab label="HTS" {...a11yProps(1)} />
+									<Tab label="MNCH" {...a11yProps(2)} />
+									<Tab label="PREP" {...a11yProps(3)} />
+									<Tab label="CRS" {...a11yProps(4)} />
+								</Tabs>
+							</Box>
+							<TabPanel value={value} index={0}>
+								<Extracts list={[]} />
+							</TabPanel>
+							<TabPanel value={value} index={1}>
+								<Extracts list={[]} />
+							</TabPanel>
+							<TabPanel value={value} index={2}>
+								<Extracts list={[]} />
+							</TabPanel>
+							<TabPanel value={value} index={3}>
+								<Extracts list={[]} />
+							</TabPanel>
+							<TabPanel value={value} index={4}>
+								<Extracts list={[]} />
+							</TabPanel>
+						</Box>
+					</SimpleCard>
+				</Grid>
+				<Grid item xs={12} md={6} xl={4}>
+					<SimpleCard title={'Upload History'}>
+						<UploadHistory />
+					</SimpleCard>
+				</Grid>
+				<Grid item xs={12} md={12} xl={8}>
+					<SimpleCard title={'Indicator Metrics'}>
+						<IndicatorMetrics />
+					</SimpleCard>
+				</Grid>
+				<Grid item xs={12} md={12} xl={4}>
+					<SimpleCard title={'Facility Metrics'}>
+						<FacilityMetrics />
+					</SimpleCard>
+				</Grid>
+			</Grid>
 		</Fragment>
 	);
 };
