@@ -80,6 +80,7 @@ const columns = [
 		options: {
 			filter: true,
 			sort: false,
+			download: false,
 		},
 	},
 	{
@@ -88,10 +89,10 @@ const columns = [
 		options: {
 			filter: true,
 			sort: false,
-		},
-		options: {
 			// Custom cell rendering function
-			customBodyRender: (value) => <div style={{ whiteSpace: 'pre-wrap' }}>{value}</div>,
+			customBodyRender: (value) => (
+				<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
+			),
 		},
 	},
 	{
@@ -108,6 +109,7 @@ const columns = [
 		options: {
 			filter: false,
 			sort: false,
+			download: false,
 		},
 	},
 ];
@@ -121,7 +123,7 @@ const data = [
 		subcounty: 'NY',
 		docket: 'HTS',
 		progress: <LinearProgressWithLabel value={44} />,
-		status: 'Upload in progress',
+		status: 'Upload In Progress',
 		updated: new Date().toDateString(),
 		action: (
 			<StyledIconButton>
@@ -146,22 +148,6 @@ const data = [
 		),
 	},
 	{
-		code: '42331',
-		facility: 'Test Corp',
-		partner: 'Test Corp',
-		subcounty: 'Tampa',
-		county: 'FL',
-		docket: 'CT',
-		progress: <LinearProgressWithLabel value={100} color="success" />,
-		status: 'Processed',
-		updated: new Date().toDateString(),
-		action: (
-			<StyledIconButton>
-				<AddIcon />
-			</StyledIconButton>
-		),
-	},
-	{
 		code: '13983',
 		facility: 'Test Corp',
 		partner: 'Test Corp',
@@ -177,11 +163,33 @@ const data = [
 			</StyledIconButton>
 		),
 	},
+	{
+		code: '42331',
+		facility: 'Test Corp',
+		partner: 'Test Corp',
+		subcounty: 'Tampa',
+		county: 'FL',
+		docket: 'CT',
+		progress: <LinearProgressWithLabel value={100} color="success" />,
+		status: 'Processed',
+		updated: new Date().toDateString(),
+		action: (
+			<StyledIconButton>
+				<AddIcon />
+			</StyledIconButton>
+		),
+	},
 ];
 
 const options = {
 	filterType: 'multiselect',
 	selectableRows: 'none',
+	downloadOptions: {
+		filterOptions: {
+			useDisplayedColumnsOnly: true,
+			useDisplayedRowsOnly: true,
+		},
+	},
 };
 const ContentBox = styled('div')(({ theme }) => ({
 	margin: '30px',
