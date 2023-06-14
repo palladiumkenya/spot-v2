@@ -7,6 +7,7 @@ import MUIDataTable from 'mui-datatables';
 import { Fragment } from 'react';
 import { Tooltip } from '@mui/material';
 import { red } from '@mui/material/colors';
+import { SimpleCard } from 'app/components';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -209,13 +210,18 @@ const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' },
 }));
-
+// children, title, subtitle, icon }
 const Analytics = () => {
   return (
     <Fragment>
       <ContentBox className="analytics">
         <MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
       </ContentBox>
+      <SimpleCard title="legend" subtitle={'colors'}>
+        <div>red</div>
+        <div>green </div>
+        <div>yello</div>
+      </SimpleCard>
     </Fragment>
   );
 };
