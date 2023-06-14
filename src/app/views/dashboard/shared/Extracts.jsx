@@ -105,8 +105,9 @@ const Extracts = () => {
               <TableCell align="left">{extract.name}</TableCell>
               <Tooltip
                 disableTouchListener
-                placement="left-start"
+                placement="bottom"
                 title={`Received: ${extract.received}/ Expected: ${extract.expected}`}
+                followCursor
               >
                 <TableCell align="center">{extract.progress}</TableCell>
               </Tooltip>
