@@ -12,6 +12,7 @@ import { H2, Paragraph } from 'app/components/Typography';
 import UploadHistory from './shared/UploadHistory';
 import FacilityMetrics from './shared/FacilityMetrics';
 import IndicatorMetrics from './shared/IndicatorMetrics';
+import Legend from 'app/components/Legend';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -50,14 +51,7 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-const CircularSpan = styled('span')({
-  display: 'inline-block',
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-  backgroundColor: 'red',
-  marginRight: '2px',
-});
+
 const Details = () => {
   const [value, setValue] = React.useState(0);
 
@@ -105,26 +99,7 @@ const Details = () => {
                 <Extracts list={[]} />
               </TabPanel>
             </Box>
-            <SimpleCard title="Legend">
-          <div style={{ width: '100%' }}>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#a7caed' }}></CircularSpan>
-              <span>On-starting</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#1976d2' }}></CircularSpan>
-              <span>On-going</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#FF3D57' }}></CircularSpan>
-              <span>On-error</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#2e7d32' }}></CircularSpan>
-              <span>On-succcess</span>
-            </span>
-          </div>
-        </SimpleCard>
+            <Legend />
           </SimpleCard>
         </Grid>
         <Grid item xs={12} md={6} xl={4}>
