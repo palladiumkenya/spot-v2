@@ -12,7 +12,14 @@ import { SimpleCard } from 'app/components';
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
-
+const Ul = styled('ul')({
+  listStyle: 'none',
+  display: 'inline-block',
+});
+const Li = styled('li')({
+  display: 'inline',
+  marginRight: '2px',
+});
 const LinearProgressWithLabel = (props) => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -136,6 +143,22 @@ const data = [
     partner: 'Test Corp',
     county: 'Yonkers',
     subcounty: 'NY',
+    docket: 'CT',
+    progress: <LinearProgressWithLabel value={0} />,
+    status: 'Upload In Progress...',
+    updated: new Date().toDateString(),
+    action: (
+      <StyledIconButton>
+        <AddIcon />
+      </StyledIconButton>
+    ),
+  },
+  {
+    code: '12331',
+    facility: 'Test Corp',
+    partner: 'Test Corp',
+    county: 'Yonkers',
+    subcounty: 'NY',
     docket: 'HTS',
     progress: <LinearProgressWithLabel value={44} />,
     status: 'Upload In Progress...',
@@ -210,18 +233,40 @@ const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' },
 }));
-// children, title, subtitle, icon }
+const CircularSpan = styled('span')({
+  display: 'inline-block',
+  width: '10px',
+  height: '10px',
+  borderRadius: '50%',
+  backgroundColor: 'red',
+  marginRight: '2px',
+});
 const Analytics = () => {
   return (
     <Fragment>
       <ContentBox className="analytics">
         <MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
+        <SimpleCard title="Legend">
+          <div style={{ width: '100%' }}>
+            <span style={{ marginRight: '8px' }}>
+              <CircularSpan style={{ background: '#a7caed' }}></CircularSpan>
+              <span>On-starting</span>
+            </span>
+            <span style={{ marginRight: '8px' }}>
+              <CircularSpan style={{ background: '#1976d2' }}></CircularSpan>
+              <span>On-going</span>
+            </span>
+            <span style={{ marginRight: '8px' }}>
+              <CircularSpan style={{ background: '#FF3D57' }}></CircularSpan>
+              <span>On-error</span>
+            </span>
+            <span style={{ marginRight: '8px' }}>
+              <CircularSpan style={{ background: '#2e7d32' }}></CircularSpan>
+              <span>On-succcess</span>
+            </span>
+          </div>
+        </SimpleCard>
       </ContentBox>
-      <SimpleCard title="legend" subtitle={'colors'}>
-        <div>red</div>
-        <div>green </div>
-        <div>yello</div>
-      </SimpleCard>
     </Fragment>
   );
 };
