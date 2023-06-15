@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { Tooltip } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { SimpleCard } from 'app/components';
+import Legend from 'app/components/Legend';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -246,26 +247,7 @@ const Analytics = () => {
     <Fragment>
       <ContentBox className="analytics">
         <MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
-        <SimpleCard title="Legend">
-          <div style={{ width: '100%' }}>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#a7caed' }}></CircularSpan>
-              <span>On-starting</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#1976d2' }}></CircularSpan>
-              <span>On-going</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#FF3D57' }}></CircularSpan>
-              <span>On-error</span>
-            </span>
-            <span style={{ marginRight: '8px' }}>
-              <CircularSpan style={{ background: '#2e7d32' }}></CircularSpan>
-              <span>On-succcess</span>
-            </span>
-          </div>
-        </SimpleCard>
+        <Legend />
       </ContentBox>
     </Fragment>
   );
