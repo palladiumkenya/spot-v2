@@ -94,8 +94,8 @@ const Extracts = () => {
         <TableHead>
           <TableRow>
             <TableCell align="left">Metric</TableCell>
-            <TableCell align="center">Value</TableCell>
-            <TableCell align="center">Description</TableCell>
+            <TableCell align="center">Progress</TableCell>
+            <TableCell align="center">Updated at</TableCell>
           </TableRow>
         </TableHead>
 

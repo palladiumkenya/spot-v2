@@ -83,13 +83,6 @@ const NotificationBar = ({ container }) => {
 			__v: 0,
 			color: 'red',
 		},
-		{
-			_id: '9eb13e4a-bb7b-11e9-9cb5-2a2ae2dbcce5',
-			message: ' Patients without ENCOUNTERS are NEVER sent by DWAPI',
-			rank: 2,
-			__v: 0,
-			color: 'red',
-		},
 	];
 
 	const handleDrawerToggle = () => {
