@@ -239,7 +239,6 @@ const CircularSpan = styled('span')({
 	marginRight: '2px',
 });
 const Analytics = () => {
-	const [open, setOpen] = useState(true);
 	return (
 		<Fragment>
 			<ContentBox className="analytics">
