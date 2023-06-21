@@ -73,17 +73,7 @@ const NotificationBar = ({ container }) => {
 	const theme = useTheme();
 	const secondary = theme.palette.text.secondary;
 	const [panelOpen, setPanelOpen] = React.useState(false);
-	const { deleteNotification, clearNotifications } = useNotification();
-	const notifications = [
-		{
-			_id: '9eb13e4a-bb7b-11e9-9cb5-2a2ae2dbcce4',
-			message:
-				'It may take upto 1 HOUR for data to be processed and displayed after being SENT',
-			rank: 1,
-			__v: 0,
-			color: 'red',
-		},
-	];
+	const { deleteNotification, clearNotifications, notifications } = useNotification();
 
 	const handleDrawerToggle = () => {
 		setPanelOpen(!panelOpen);
@@ -120,40 +110,28 @@ const NotificationBar = ({ container }) => {
 
 						{notifications?.map((notification) => (
 							<NotificationCard key={notification._id}>
-								<DeleteButton
-									size="small"
-									className="deleteButton"
-									onClick={() => deleteNotification(notification._id)}
-								>
-									<Icon className="icon">clear</Icon>
-								</DeleteButton>
-								<Link
+								{/* <Link
 									to={`/${notification.path}`}
 									onClick={handleDrawerToggle}
 									style={{ textDecoration: 'none' }}
-								>
-									<Card sx={{ mx: 2, mb: 3 }} elevation={3}>
-										<CardLeftContent>
-											<Box display="flex">
-												<Icon className="icon" color={'error'}>
-													{'notifications'}
-												</Icon>
-											</Box>
-											<Small className="messageTime">
-												{getTimeDifference(new Date())}
-												ago
-											</Small>
-										</CardLeftContent>
-										<Box sx={{ px: 2, pt: 1, pb: 2 }}>
-											<Paragraph sx={{ m: 0 }}>
-												{notification.title}
-											</Paragraph>
-											<Small sx={{ color: secondary }}>
-												{notification.message}
-											</Small>
+								> */}
+								<Card sx={{ mx: 2, mb: 3 }} elevation={3}>
+									<CardLeftContent>
+										<Box display="flex">
+											<Icon className="icon" color={'primary'}>
+												{'notifications'}
+											</Icon>
 										</Box>
-									</Card>
-								</Link>
+									</CardLeftContent>
+									<Box sx={{ px: 2, pt: 1, pb: 2 }}>
+										<Paragraph sx={{ m: 0 }}>{notification.title}</Paragraph>
+										<Small sx={{ color: secondary }}>
+											{JSON.stringify(notification)}
+											{notification.message}
+										</Small>
+									</Box>
+								</Card>
+								{/* </Link> */}
 							</NotificationCard>
 						))}
 						{!!notifications?.length && (
