@@ -3,7 +3,6 @@ import { Box, styled, useTheme } from '@mui/system';
 import useNotification from 'app/hooks/useNotification';
 import useSettings from 'app/hooks/useSettings';
 import { sideNavWidth, topBarHeight } from 'app/utils/constant';
-import { getTimeDifference } from 'app/utils/utils.js';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { themeShadows } from '../MatxTheme/themeColors';
@@ -40,14 +39,6 @@ const NotificationCard = styled(Box)(({ theme }) => ({
 	'& .icon': { fontSize: '1.25rem' },
 }));
 
-const DeleteButton = styled(IconButton)(({ theme }) => ({
-	opacity: '0',
-	position: 'absolute',
-	right: 5,
-	marginTop: 9,
-	marginRight: '24px',
-	background: 'rgba(0, 0, 0, 0.01)',
-}));
 
 const CardLeftContent = styled('div')(({ theme }) => ({
 	padding: '12px 8px',
@@ -73,7 +64,7 @@ const NotificationBar = ({ container }) => {
 	const theme = useTheme();
 	const secondary = theme.palette.text.secondary;
 	const [panelOpen, setPanelOpen] = React.useState(false);
-	const { deleteNotification, clearNotifications, notifications } = useNotification();
+	const { clearNotifications, notifications } = useNotification();
 
 	const handleDrawerToggle = () => {
 		setPanelOpen(!panelOpen);
@@ -109,7 +100,7 @@ const NotificationBar = ({ container }) => {
 						</Notification>
 
 						{notifications?.map((notification) => (
-							<NotificationCard key={notification._id}>
+							<NotificationCard key={notification.id}>
 								{/* <Link
 									to={`/${notification.path}`}
 									onClick={handleDrawerToggle}
@@ -126,7 +117,6 @@ const NotificationBar = ({ container }) => {
 									<Box sx={{ px: 2, pt: 1, pb: 2 }}>
 										<Paragraph sx={{ m: 0 }}>{notification.title}</Paragraph>
 										<Small sx={{ color: secondary }}>
-											{JSON.stringify(notification)}
 											{notification.message}
 										</Small>
 									</Box>

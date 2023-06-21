@@ -72,11 +72,7 @@ const extractsList = [
 		date: '1 january, 2019',
 		received: 90,
 		expected: 1500,
-		progress: (
-			<Tooltip disableTouchListener title="Received: 0/ Expected: 1200">
-				<LinearProgressWithLabel value={3} />
-			</Tooltip>
-		),
+		progress: <LinearProgressWithLabel value={3} />,
 	},
 	{
 		name: 'Patient Pharmacy',
@@ -93,7 +89,7 @@ const Extracts = () => {
 			<StyledTable>
 				<TableHead>
 					<TableRow>
-						<TableCell align="left">Metric</TableCell>
+						<TableCell align="left">Extract</TableCell>
 						<TableCell align="center">Progress</TableCell>
 						<TableCell align="center">Status Date</TableCell>
 					</TableRow>

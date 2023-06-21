@@ -1,6 +1,4 @@
 import { Box, styled, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import LinearProgress from '@mui/material/LinearProgress';
-import Typography from '@mui/material/Typography';
 
 const StyledTable = styled(Table)(({ theme }) => ({
 	whiteSpace: 'pre',
@@ -41,7 +39,7 @@ const FacilityMetrics = () => {
 			<StyledTable>
 				<TableHead>
 					<TableRow>
-						<TableCell align="left">Metrics</TableCell>
+						<TableCell align="left">Metric</TableCell>
 						<TableCell align="center">Value</TableCell>
 						<TableCell align="center">Description</TableCell>
 					</TableRow>

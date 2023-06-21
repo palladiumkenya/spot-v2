@@ -1,4 +1,4 @@
-import { Card, Grid, styled, useTheme, IconButton, Alert, AlertTitle, Collapse } from '@mui/material';
+import { styled, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
@@ -9,19 +9,14 @@ import { Tooltip } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { SimpleCard } from 'app/components';
 import Legend from 'app/components/Legend';
-import CloseIcon from '@mui/icons-material/Close';
+import RefreshAlert from './shared/RefreshAlert';
+import useNotification from 'app/hooks/useNotification';
+import { NotificationProvider } from 'app/contexts/NotificationContext';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
 	color: theme.palette.text.primary,
 }));
-const Ul = styled('ul')({
-	listStyle: 'none',
-	display: 'inline-block',
-});
-const Li = styled('li')({
-	display: 'inline',
-	marginRight: '2px',
-});
+
 const LinearProgressWithLabel = (props) => {
 	return (
 		<Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -248,27 +243,9 @@ const Analytics = () => {
 	return (
 		<Fragment>
 			<ContentBox className="analytics">
-        <Collapse in={open}>
-				<Alert
-					severity="info"
-					sx={{ marginBottom: '10px' }}
-					action={
-						<IconButton
-							aria-label="close"
-							color="inherit"
-							size="small"
-							onClick={() => {
-								setOpen(false);
-							}}
-						>
-							<CloseIcon fontSize="inherit" />
-						</IconButton>
-					}
-				>
-					<AlertTitle>DWH REFRESH</AlertTitle>
-					{`The last refresh was on ${new Date().toDateString()}`}
-				</Alert>
-        </Collapse>
+					<NotificationProvider>
+						<RefreshAlert />
+					</NotificationProvider>
 				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
 				<Legend />
 			</ContentBox>
