@@ -242,9 +242,9 @@ const Analytics = () => {
 	return (
 		<Fragment>
 			<ContentBox className="analytics">
-					<NotificationProvider>
-						<RefreshAlert />
-					</NotificationProvider>
+				<NotificationProvider>
+					<RefreshAlert />
+				</NotificationProvider>
 				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
 				<Legend />
 			</ContentBox>

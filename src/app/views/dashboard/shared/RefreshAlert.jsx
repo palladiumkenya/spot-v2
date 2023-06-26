@@ -6,12 +6,12 @@ import useNotification from 'app/hooks/useNotification';
 const RefreshAlert = () => {
 	const [open, setOpen] = useState(true);
 	const { notifications } = useNotification();
-	
+
 	return (
 		<>
 			<Collapse in={open}>
 				{notifications
-					?.filter((n) => n.level == 2)
+					?.filter((n) => n.level === 2)
 					?.map((notification) => (
 						<Alert
 							severity="info"

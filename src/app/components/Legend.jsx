@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { SimpleCard } from ".";
+import FlowDiagram from "./FlowDiagram";
 
 const CircularSpan = styled('span')({
     display: 'inline-block',
@@ -31,6 +32,7 @@ const CircularSpan = styled('span')({
               <span>On-succcess</span>
             </span>
           </div>
+          <FlowDiagram /> 
         </SimpleCard>
   );
   }
