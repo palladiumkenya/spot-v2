@@ -1,4 +1,4 @@
-import { AppBar, Button, ThemeProvider, Toolbar } from '@mui/material';
+import { AppBar, ThemeProvider, Toolbar } from '@mui/material';
 import { styled, useTheme } from '@mui/system';
 import useSettings from 'app/hooks/useSettings';
 import { topBarHeight } from 'app/utils/constant';
@@ -46,7 +46,9 @@ const Footer = () => {
             </a> */}
 						<Span sx={{ m: 'auto' }}></Span>
 						<Paragraph sx={{ m: 0 }}>
-							<a href="">help@palladiumgroup.on.spiceworks.com</a>
+							<a href="mailto:help@palladiumgroup.on.spiceworks.com">
+								help@palladiumgroup.on.spiceworks.com
+							</a>
 						</Paragraph>
 					</FooterContent>
 				</AppFooter>

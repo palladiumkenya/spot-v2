@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import EcommerceReducer from './EcommerceReducer';
-import NavigationReducer from './NavigationReducer';
 import NotificationReducer from './NotificationReducer';
+import reducer from './reducer';
 
 const RootReducer = combineReducers({
-  notifications: NotificationReducer,
-  navigations: NavigationReducer,
-  ecommerce: EcommerceReducer,
+	notifications: NotificationReducer,
+	reducers: reducer,
 });
 
 export default RootReducer;

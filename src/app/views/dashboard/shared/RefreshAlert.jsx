@@ -14,6 +14,7 @@ const RefreshAlert = () => {
 					?.filter((n) => n.level === 2)
 					?.map((notification) => (
 						<Alert
+							key={notification.id}
 							severity="info"
 							sx={{ marginBottom: '10px' }}
 							action={

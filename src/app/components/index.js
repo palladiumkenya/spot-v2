@@ -9,7 +9,6 @@ export { default as MatxLogo } from './MatxLogo';
 export { default as MatxSearchBox } from './MatxSearchBox';
 // export { default as MatxSnackbar } from './MatxSnackbar';
 export { default as MatxSuspense } from './MatxSuspense';
-export { EchartTheme } from './MatxTheme/EchartTheme';
 export { default as MatxTheme } from './MatxTheme/MatxTheme';
 // export { default as MatxToolbarMenu } from './MatxToolbarMenu';
 export { default as MatxVerticalNav } from './MatxVerticalNav/MatxVerticalNav';

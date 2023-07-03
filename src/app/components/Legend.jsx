@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { SimpleCard } from ".";
 import FlowDiagram from "./FlowDiagram";
+import { Box } from "@mui/material";
 
 const CircularSpan = styled('span')({
     display: 'inline-block',
@@ -13,6 +14,7 @@ const CircularSpan = styled('span')({
   
   const Legend = () =>{
   return (
+    <Box>
         <SimpleCard title="Legend">
           <div style={{ width: '100%' }}>
             <span style={{ marginRight: '8px' }}>
@@ -34,6 +36,7 @@ const CircularSpan = styled('span')({
           </div>
           <FlowDiagram /> 
         </SimpleCard>
+        </Box>
   );
   }
   export default Legend;
