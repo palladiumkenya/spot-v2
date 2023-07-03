@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
 
 ReactDOM.render(
   <StyledEngineProvider injectFirst>

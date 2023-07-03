@@ -44,7 +44,7 @@ export const NotificationProvider = ({ settings, children }) => {
 
 	const getNotifications = async () => {
 		try {
-			const res = await axios.get('http://localhost:8000/api/notices/');
+			const res = await axios.get('/notices/');
 			dispatch({
 				type: 'LOAD_NOTIFICATIONS',
 				payload: res.data.notices,
