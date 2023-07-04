@@ -45,7 +45,6 @@ const a11yProps = (index) => {
 const ExtractsCard = ({ code }) => {
 	const [value, setValue] = React.useState(0);
 	const { manifests } = useExtracts();
-	console.log(manifests);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);

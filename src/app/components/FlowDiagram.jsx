@@ -12,15 +12,14 @@ const FlowDiagram = () => {
 			data: { label: 'Upload in progress' },
 			style: { background: '#1976d2', color: 'white' },
 			sourcePosition: 'right',
-			targetPosition: null,
+			type: 'input',
 			sourceHandle: 'out',
-			targetHandle: 'in',
 		},
 		{
 			id: '2',
 			position: { x: 300, y: 90 },
 			data: { label: 'Queued For Processing' },
-			style: { background: '#1976d2', color: 'white' },
+			style: { background: '#FFAF38', color: 'white' },
 			sourcePosition: 'right',
 			targetPosition: 'left',
 			sourceHandle: 'out',
@@ -35,8 +34,10 @@ const FlowDiagram = () => {
 			targetPosition: 'left',
 			sourceHandle: 'out',
 			targetHandle: 'in',
+			type: 'output',
 		},
 	];
+
 	const initialEdges = [
 		{
 			id: '1->2',
@@ -57,6 +58,7 @@ const FlowDiagram = () => {
 			},
 		},
 	];
+
 	return (
 		<Box width="100%" height={'150px'} overflow="auto">
 			<ReactFlow
@@ -64,11 +66,12 @@ const FlowDiagram = () => {
 				edges={initialEdges}
 				panOnDrag={false}
 				fitView={true}
-				panningEnabled={false}
-				zoomingEnabled={false}
+				// panningEnabled={false}
+				// zoomingEnabled={false}
 				zoomOnScroll={false}
 				panOnScroll={false}
 				zoomOnPinch={false}
+				zoomOnDoubleClick={false}
 				elementsSelectable={false}
 				preventScrolling={true}
 			/>

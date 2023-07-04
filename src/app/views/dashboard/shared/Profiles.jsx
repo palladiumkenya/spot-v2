@@ -34,11 +34,11 @@ const Profiles = () => {
 	const navigate = useNavigate();
 
 	const handleClick = (param) => {
-		const url = `/showcase/${param}`; 
+		const url = `/showcase/${param}`;
 
 		navigate(url);
 	};
-	
+
 	const columns = [
 		{
 			name: 'mfl_code',
@@ -53,7 +53,11 @@ const Profiles = () => {
 			label: 'Facility',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
+				// Custom cell rendering function
+				customBodyRender: (value) => (
+					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
+				),
 			},
 		},
 		{
@@ -61,7 +65,7 @@ const Profiles = () => {
 			label: 'County',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
@@ -69,7 +73,7 @@ const Profiles = () => {
 			label: 'Sub-County',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
@@ -77,7 +81,11 @@ const Profiles = () => {
 			label: 'Partner',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
+				// Custom cell rendering function
+				customBodyRender: (value) => (
+					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
+				),
 			},
 		},
 		{
@@ -85,14 +93,14 @@ const Profiles = () => {
 			label: 'Docket',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
 			name: 'progress',
 			label: 'Progress',
 			options: {
-				filter: true,
+				filter: false,
 				sort: false,
 				download: false,
 				customBodyRender: (value) => (
@@ -114,7 +122,7 @@ const Profiles = () => {
 			label: 'Status',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 				// Custom cell rendering function
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
@@ -126,7 +134,7 @@ const Profiles = () => {
 			label: 'Updated',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
@@ -164,6 +172,7 @@ const Profiles = () => {
 			progress = (
 				<LinearProgressWithLabel
 					value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
+					color={'secondary'}
 				/>
 			);
 		}
