@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { updateCode } from '../../redux/actions/actions';
 import { FacilityProvider } from 'app/contexts/FacilityContext';
 import FacilityInfo from './shared/FacilityInfo';
+import { IndicatorMetricsProvider } from 'app/contexts/IndicatorMetricsContext';
 
 const Details = ({ updateCode }) => {
 	const { param } = useParams();
@@ -42,7 +43,9 @@ const Details = ({ updateCode }) => {
 				</Grid>
 				<Grid item xs={12} md={12} xl={8}>
 					<SimpleCard title={'Indicator Metrics'}>
-						<IndicatorMetrics />
+						<IndicatorMetricsProvider>
+							<IndicatorMetrics />
+						</IndicatorMetricsProvider>
 					</SimpleCard>
 				</Grid>
 				<Grid item xs={12} md={12} xl={4}>

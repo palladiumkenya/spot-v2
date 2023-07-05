@@ -1,19 +1,59 @@
-import {
-	Box,
-} from '@mui/material';
+import { Box } from '@mui/material';
+import useIndicatorMetrics from 'app/hooks/useIndicatorMetrics';
 import Chart from 'react-apexcharts';
 
+// This function rearranges the data
+const rearrangeData = (data, order) => {
+	let rearrangedData = {
+		dwh_values: [],
+		emr_values: [],
+		names: [],
+		dwh_dates: [],
+		emr_dates: [],
+	};
+
+	order.forEach((item) => {
+		let name = typeof item === 'string' ? item : item[0];
+		let index = data?.names.indexOf(name);
+
+		rearrangedData.dwh_values.push(index !== -1 ? data?.dwh_values[index] : null);
+		rearrangedData.emr_values.push(index !== -1 ? data?.emr_values[index] : null);
+		rearrangedData.names.push(name);
+		rearrangedData.dwh_dates.push(index !== -1 ? data?.dwh_dates[index] : null);
+		rearrangedData.emr_dates.push(index !== -1 ? data?.emr_dates[index] : null);
+	});
+
+	return rearrangedData;
+};
+
 const IndicatorMetrics = () => {
+	const { metrics } = useIndicatorMetrics();
+	console.log(metrics);
+
+	let order = [
+		'HTS_TESTED',
+		'HTS_TESTED_POS',
+		'HTS_INDEX',
+		'HTS_INDEX_POS',
+		'TX_NEW',
+		'TX_CURR',
+		'RETENTION_ON_ART_12_MONTHS',
+		'RETENTION_ON_ART_VL_1000_12_MONTHS',
+	];
+
+	let rearrangedData = rearrangeData(metrics, order);
+	console.log(rearrangedData);
+
 	let series = [
 		{
 			name: 'EMR',
 			type: 'bar',
-			data: [44, 55, 57, 56, 61, 58, 63, 60],
+			data: rearrangedData?.emr_values,
 		},
 		{
 			name: 'DWH',
 			type: 'bar',
-			data: [76, 85, 101, 98, 87, 105, 91, 23],
+			data: rearrangedData?.dwh_values ?? [],
 		},
 	];
 	let options = {
