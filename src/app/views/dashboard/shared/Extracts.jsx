@@ -38,8 +38,41 @@ const StyledTable = styled(Table)(({ theme }) => ({
 	},
 }));
 
-const Extracts = ({ list = [] }) => {
-	console.log(list);
+const getProgressPerc = (ex, re) => {
+	return parseInt((re / ex) * 100);
+};
+
+const Extracts = ({ list = {} }) => {
+	list = list?.documents
+		?.filter((doc) => doc.expected !== null)
+		?.map((ex) => {
+			let progress = <LinearProgressWithLabel color="error" value={44} />;
+			let tooltip = '';
+			if (ex.queued === ex.expected) {
+				progress = (
+					<LinearProgressWithLabel
+						value={getProgressPerc(ex.received, ex.queued)}
+						color={'success'}
+					/>
+				);
+				tooltip = `Queued: ${ex.queued}/ Expected: ${ex.expected}`;
+			} else if (ex.expected > ex.received && ex.queued === 0) {
+				progress = (
+					<LinearProgressWithLabel value={getProgressPerc(ex.expected, ex.received)} />
+				);
+				tooltip = `Received: ${ex.received}/ Expected: ${ex.expected}`;
+			} else if (ex.queued < ex.received) {
+				progress = (
+					<LinearProgressWithLabel
+						value={getProgressPerc(ex.received, ex.queued)}
+						color={'secondary'}
+					/>
+				);
+				tooltip = `Queued: ${ex.queued}/ Expected: ${ex.expected}`;
+			}
+			return { ...ex, progress, tooltip };
+		})
+		.sort((a, b) => a.rank - b.rank);
 	return (
 		<Box width="100%" overflow="auto">
 			<StyledTable>
@@ -52,13 +85,13 @@ const Extracts = ({ list = [] }) => {
 				</TableHead>
 
 				<TableBody>
-					{list?.documents?.map((extract, index) => (
+					{list?.map((extract, index) => (
 						<TableRow key={index}>
 							<TableCell align="left">{extract.extract_display_name}</TableCell>
 							<Tooltip
 								disableTouchListener
 								placement="bottom"
-								title={`Received: ${extract.received}/ Expected: ${extract.expected}`}
+								title={`${extract.tooltip}`}
 								followCursor
 							>
 								<TableCell align="center">{extract.progress}</TableCell>
