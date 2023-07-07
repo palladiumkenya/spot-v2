@@ -1,22 +1,69 @@
+import useUploadHistory from 'app/hooks/useUploadHistory';
 import { Fragment } from 'react';
 import Chart from 'react-apexcharts';
+import moment from 'moment';
+
+const MonthYear = () => {
+	// Generate the short month name and short year for the last 12 months
+	const last12Months = [];
+	for (let i = 0; i < 12; i++) {
+		const monthYear = moment().subtract(i, 'months').format('MMM YY');
+		last12Months.unshift(monthYear); // Use unshift to maintain the correct order
+	}
+
+	return last12Months;
+};
+
+let ChartArray = (data, dates) => {
+	// Group the data by year and month
+	const groupedData = data?.reduce((result, item) => {
+		const monthYear = moment(item.log_date).format('MMM YY');
+		if (!result[monthYear]) {
+			result[monthYear] = [];
+		}
+		result[monthYear].push(item);
+		return result;
+	}, {});
+
+	const latestValues = dates.map((monthYear) => {
+		const dataForMonth = groupedData[monthYear];
+		if (dataForMonth) {
+			const latestData = dataForMonth.reduce((latest, item) => {
+				return moment(item.log_date).isAfter(moment(latest.log_date)) ? item : latest;
+			});
+			return latestData.received;
+		}
+		return null;
+	});
+
+	return latestValues;
+};
 
 const UploadHistory = () => {
+	const { history } = useUploadHistory();
+	const last12Months = MonthYear();
+
+	const groupedDataByDocket = history?.reduce((result, item) => {
+		const { received, log_date, docket } = item;
+		if (!result[docket]) {
+			result[docket] = {
+				history: [],
+			};
+		}
+		result[docket].history.push({ received, log_date, docket });
+		return result;
+	}, {});
+	let NDWH = ChartArray(groupedDataByDocket?.NDWH?.history ?? [], last12Months);
+	let PREP = ChartArray(groupedDataByDocket?.PREP?.history ?? [], last12Months);
+	let MNCH = ChartArray(groupedDataByDocket?.MNCH?.history ?? [], last12Months);
+	let HTS = ChartArray(groupedDataByDocket?.HTS?.history ?? [], last12Months);
+
 	const options = {
 		chart: {
 			id: 'basic-bar',
 		},
 		xaxis: {
-			categories: [
-				'22-JUN',
-				'22-JUL',
-				'22-AUG',
-				'22-SEP',
-				'22-OCT',
-				'22-NOV',
-				'22-DEC',
-				'23-JAN',
-			],
+			categories: MonthYear(),
 		},
 		markers: {
 			size: [3],
@@ -28,23 +75,19 @@ const UploadHistory = () => {
 	const series = [
 		{
 			name: 'C&T',
-			data: [3000, 4050, 4345, 3450, 4949, 5360, 7009, 9143],
+			data: NDWH,
 		},
 		{
 			name: 'PREP',
-			data: [null, 2340, 4523, 5430, 4099, 6120, 4270, 8791],
+			data: PREP,
 		},
 		{
 			name: 'HTS',
-			data: [4900, 4850, 4945, 3950, 4749, 4360, 4009, 4443],
-		},
-		{
-			name: 'CRS',
-			data: [6100, 7050, 6345, null, 6749, 8360, 9209, 7143],
+			data: MNCH,
 		},
 		{
 			name: 'MNCH',
-			data: [2200, 2050, 2345, 1450, 2749, 2360, null, 3000],
+			data: MNCH,
 		},
 	];
 

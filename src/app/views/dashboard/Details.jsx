@@ -3,22 +3,21 @@ import { SimpleCard } from 'app/components';
 import { Fragment } from 'react';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { ManifestProvider } from './../../contexts/ExtractsContext';
-import { H2, Paragraph } from 'app/components/Typography';
 import UploadHistory from './shared/UploadHistory';
 import FacilityMetrics from './shared/FacilityMetrics';
 import IndicatorMetrics from './shared/IndicatorMetrics';
 import ExtractsCard from './shared/ExtractsCard';
+import FacilityInfo from './shared/FacilityInfo';
 import { connect } from 'react-redux';
 import { updateCode } from '../../redux/actions/actions';
 import { FacilityProvider } from 'app/contexts/FacilityContext';
-import FacilityInfo from './shared/FacilityInfo';
 import { IndicatorMetricsProvider } from 'app/contexts/IndicatorMetricsContext';
+import { ManifestProvider } from './../../contexts/ExtractsContext';
+import { UploadHistoryProvider } from 'app/contexts/UploadHistoryContext';
 
 const Details = ({ updateCode }) => {
 	const { param } = useParams();
 	updateCode(param);
-	// TODO:: Facility information from api
 
 	return (
 		<Fragment>
@@ -26,7 +25,7 @@ const Details = ({ updateCode }) => {
 				{/* <ContentBox className="analytics"> */}
 				<Grid item xs={12} md={12}>
 					<FacilityProvider>
-						<FacilityInfo /> 
+						<FacilityInfo />
 					</FacilityProvider>
 				</Grid>
 				{/* </ContentBox>
@@ -38,7 +37,9 @@ const Details = ({ updateCode }) => {
 				</Grid>
 				<Grid item xs={12} md={6} xl={4}>
 					<SimpleCard title={'Upload History'}>
-						<UploadHistory />
+						<UploadHistoryProvider>
+							<UploadHistory />
+						</UploadHistoryProvider>
 					</SimpleCard>
 				</Grid>
 				<Grid item xs={12} md={12} xl={8}>

@@ -28,7 +28,6 @@ const rearrangeData = (data, order) => {
 
 const IndicatorMetrics = () => {
 	const { metrics } = useIndicatorMetrics();
-	console.log(metrics);
 
 	let order = [
 		'HTS_TESTED',
@@ -42,7 +41,6 @@ const IndicatorMetrics = () => {
 	];
 
 	let rearrangedData = rearrangeData(metrics, order);
-	console.log(rearrangedData);
 
 	let series = [
 		{
