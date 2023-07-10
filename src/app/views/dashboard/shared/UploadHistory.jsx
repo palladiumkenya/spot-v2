@@ -2,6 +2,7 @@ import useUploadHistory from 'app/hooks/useUploadHistory';
 import { Fragment } from 'react';
 import Chart from 'react-apexcharts';
 import moment from 'moment';
+import Loading from './../../../components/MatxLoading';
 
 const MonthYear = () => {
 	// Generate the short month name and short year for the last 12 months
@@ -83,7 +84,7 @@ const UploadHistory = () => {
 		},
 		{
 			name: 'HTS',
-			data: MNCH,
+			data: HTS,
 		},
 		{
 			name: 'MNCH',
@@ -93,7 +94,11 @@ const UploadHistory = () => {
 
 	return (
 		<Fragment>
-			<Chart options={options} series={series} type="line" height={'450px'} />
+			{history === undefined ? (
+				<Loading />
+			) : (
+				<Chart options={options} series={series} type="line" height={'450px'} />
+			)}
 		</Fragment>
 	);
 };

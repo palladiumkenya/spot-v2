@@ -8,6 +8,7 @@ import Extracts from './Extracts';
 import { SimpleCard } from 'app/components';
 import Legend from 'app/components/Legend';
 import useExtracts from 'app/hooks/useExtracts';
+import Loading from 'app/components/MatxLoading';
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
@@ -42,7 +43,7 @@ const a11yProps = (index) => {
 	};
 };
 
-const ExtractsCard = ({ code }) => {
+const ExtractsCard = () => {
 	const [value, setValue] = React.useState(0);
 	const { manifests } = useExtracts();
 
@@ -50,30 +51,33 @@ const ExtractsCard = ({ code }) => {
 		setValue(newValue);
 	};
 
-
 	return (
 		<SimpleCard title="">
 			<Box sx={{ width: '100%' }}>
-				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-					<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-						<Tab label="NDWH" {...a11yProps(0)} />
-						<Tab label="HTS" {...a11yProps(1)} />
-						<Tab label="MNCH" {...a11yProps(2)} />
-						<Tab label="PREP" {...a11yProps(3)} />
-					</Tabs>
-				</Box>
-				<TabPanel value={value} index={0}>
-					<Extracts list={manifests?.find((x) => x.docket === 'NDWH')} />
-				</TabPanel>
-				<TabPanel value={value} index={1}>
-					<Extracts list={manifests?.find((x) => x.docket === 'HTS')} />
-				</TabPanel>
-				<TabPanel value={value} index={2}>
-					<Extracts list={manifests?.find((x) => x.docket === 'MNCH')} />
-				</TabPanel>
-				<TabPanel value={value} index={3}>
-					<Extracts list={manifests?.find((x) => x.docket === 'PREP')} />
-				</TabPanel>
+			{manifests === undefined ? <Loading />:
+				
+				<>
+					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+							<Tab label="NDWH" {...a11yProps(0)} />
+							<Tab label="HTS" {...a11yProps(1)} />
+							<Tab label="MNCH" {...a11yProps(2)} />
+							<Tab label="PREP" {...a11yProps(3)} />
+						</Tabs>
+					</Box>
+					<TabPanel value={value} index={0}>
+						<Extracts list={manifests?.find((x) => x.docket === 'NDWH')} />
+					</TabPanel>
+					<TabPanel value={value} index={1}>
+						<Extracts list={manifests?.find((x) => x.docket === 'HTS')} />
+					</TabPanel>
+					<TabPanel value={value} index={2}>
+						<Extracts list={manifests?.find((x) => x.docket === 'MNCH')} />
+					</TabPanel>
+					<TabPanel value={value} index={3}>
+						<Extracts list={manifests?.find((x) => x.docket === 'PREP')} />
+					</TabPanel>
+				</>}
 			</Box>
 			<Legend />
 		</SimpleCard>

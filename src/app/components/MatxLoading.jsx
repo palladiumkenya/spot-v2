@@ -1,5 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import { Box, styled } from '@mui/system';
+import { H6 } from './Typography';
 
 const StyledLoading = styled('div')(() => ({
 	width: '100%',
@@ -22,8 +23,13 @@ const StyledLoading = styled('div')(() => ({
 const Loading = () => {
 	return (
 		<StyledLoading>
-			<Box position="relative">
-				<img src="/assets/images/logo.png" alt="" />
+			<Box position="flex">
+				<img
+					src="/assets/images/logo.png"
+					alt=""
+					style={{ filter: 'saturate(500%) contrast(800%) brightness(500%) invert(80%) sepia(50%) hue-rotate(120deg)' }}
+				/>
+				<H6>Loading...</H6>
 				<CircularProgress className="circleProgress" />
 			</Box>
 		</StyledLoading>

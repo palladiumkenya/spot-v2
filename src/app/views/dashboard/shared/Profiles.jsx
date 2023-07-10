@@ -5,6 +5,7 @@ import MUIDataTable from 'mui-datatables';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import useProfile from 'app/hooks/useProfiles';
+import Loading from 'app/components/MatxLoading';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
 	color: theme.palette.text.primary,
@@ -176,7 +177,14 @@ const Profiles = () => {
 				/>
 			);
 		}
-		return { ...prof, progress, updated: new Date(prof.updated).toLocaleString(), action };
+		let docket = prof?.docket === 'NDWH' ? 'C&T': prof?.docket
+		return {
+			...prof,
+			progress,
+			docket,
+			updated: new Date(prof.updated).toLocaleString(),
+			action,
+		};
 	});
 
 	const options = {
@@ -184,14 +192,18 @@ const Profiles = () => {
 		selectableRows: 'none',
 		downloadOptions: {
 			filterOptions: {
-				useDisplayedColumnsOnly: true,
+				useDisplayedColumnsOnly: false,
 				useDisplayedRowsOnly: true,
 			},
 		},
+		text: 'Loading data...',
+		progressClassName: 'custom-progress',
+		progressRender: () => <Loading color="primary" />,
 	};
 	return (
 		<Box>
-			<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
+			{!!!profiles ? <Loading /> :
+			<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />}
 		</Box>
 	);
 };

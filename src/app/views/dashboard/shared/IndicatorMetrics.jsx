@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import Loading from 'app/components/MatxLoading';
 import useIndicatorMetrics from 'app/hooks/useIndicatorMetrics';
 import Chart from 'react-apexcharts';
 
@@ -116,7 +117,11 @@ const IndicatorMetrics = () => {
 
 	return (
 		<Box width="100%">
-			<Chart options={options} series={series} type="bar" width="100%" />
+			{metrics === undefined ? (
+				<Loading />
+			) : (
+				<Chart options={options} series={series} type="bar" width="100%" />
+			)}
 		</Box>
 	);
 };

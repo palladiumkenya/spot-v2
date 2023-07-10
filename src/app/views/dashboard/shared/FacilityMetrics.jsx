@@ -1,4 +1,5 @@
 import { Box, styled, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import Loading from 'app/components/MatxLoading';
 
 const StyledTable = styled(Table)(({ theme }) => ({
 	whiteSpace: 'pre',
@@ -36,25 +37,29 @@ const extractsList = [
 const FacilityMetrics = () => {
 	return (
 		<Box width="100%" overflow="auto">
-			<StyledTable>
-				<TableHead>
-					<TableRow>
-						<TableCell align="left">Metric</TableCell>
-						<TableCell align="center">Value</TableCell>
-						<TableCell align="center">Description</TableCell>
-					</TableRow>
-				</TableHead>
-
-				<TableBody>
-					{extractsList.map((extract, index) => (
-						<TableRow key={index}>
-							<TableCell align="left">{extract.metric}</TableCell>
-							<TableCell align="center">{extract.value}</TableCell>
-							<TableCell align="center">{extract.description}</TableCell>
+			{extractsList === undefined ? (
+				<Loading />
+			) : (
+				<StyledTable>
+					<TableHead>
+						<TableRow>
+							<TableCell align="left">Metric</TableCell>
+							<TableCell align="center">Value</TableCell>
+							<TableCell align="center">Description</TableCell>
 						</TableRow>
-					))}
-				</TableBody>
-			</StyledTable>
+					</TableHead>
+
+					<TableBody>
+						{extractsList.map((extract, index) => (
+							<TableRow key={index}>
+								<TableCell align="left">{extract.metric}</TableCell>
+								<TableCell align="center">{extract.value}</TableCell>
+								<TableCell align="center">{extract.description}</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</StyledTable>
+			)}
 		</Box>
 	);
 };

@@ -1,4 +1,5 @@
 import { SimpleCard } from 'app/components';
+import Loading from 'app/components/MatxLoading';
 import { H2, Paragraph } from 'app/components/Typography';
 import useFacility from 'app/hooks/useFacility';
 
@@ -7,8 +8,14 @@ const FacilityInfo = () => {
 
 	return (
 		<SimpleCard sx={{ width: '100%' }}>
-			<H2>{facility?.name}</H2>
-			<Paragraph sx={{ m: 0 }}>Code: {facility?.mfl_code}</Paragraph>
+			{facility === undefined ? (
+				<Loading />
+			) : (
+				<>
+					<H2>{facility?.name}</H2>
+					<Paragraph sx={{ m: 0 }}>Code: {facility?.mfl_code}</Paragraph>
+				</>
+			)}
 		</SimpleCard>
 	);
 };
