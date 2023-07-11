@@ -156,14 +156,7 @@ const Profiles = () => {
 				<AddIcon />
 			</StyledIconButton>
 		);
-		if (prof.totalQueued === prof.totalReceived) {
-			progress = (
-				<LinearProgressWithLabel
-					value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
-					color={'success'}
-				/>
-			);
-		} else if (prof.totalExpected > prof.totalReceived) {
+		if (prof.totalExpected > prof.totalReceived) {
 			progress = (
 				<LinearProgressWithLabel
 					value={getProgressPerc(prof.totalExpected, prof.totalReceived)}
@@ -174,6 +167,13 @@ const Profiles = () => {
 				<LinearProgressWithLabel
 					value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
 					color={'secondary'}
+				/>
+			);
+		} else if (prof.totalQueued === prof.totalReceived) {
+			progress = (
+				<LinearProgressWithLabel
+					value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
+					color={'success'}
 				/>
 			);
 		}
