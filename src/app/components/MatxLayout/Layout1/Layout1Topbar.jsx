@@ -1,4 +1,4 @@
-import {  Hidden, IconButton, MenuItem } from '@mui/material';
+import { Hidden, IconButton, MenuItem } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { themeShadows } from 'app/components/MatxTheme/themeColors';
 import { NotificationProvider } from 'app/contexts/NotificationContext';
@@ -67,7 +67,6 @@ const IconBox = styled('div')(({ theme }) => ({
 }));
 
 const Layout1Topbar = () => {
-
 	return (
 		<TopbarRoot>
 			<TopbarContainer>
@@ -75,9 +74,11 @@ const Layout1Topbar = () => {
 					<StyledIconButton></StyledIconButton>
 					<UserMenu>
 						<Hidden xsDown>
-							<Span>
-								<strong>SPOT</strong>
-							</Span>
+							<Link to={'/'}>
+								<Span>
+									<strong>SPOT</strong>
+								</Span>
+							</Link>
 						</Hidden>
 					</UserMenu>
 
