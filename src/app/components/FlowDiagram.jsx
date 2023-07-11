@@ -58,9 +58,10 @@ const FlowDiagram = () => {
 			},
 		},
 	];
+	let isLocked = true;
 
 	return (
-		<Box width="100%" height={'150px'} overflow="auto">
+		<Box width="100%" height={'150px'}>
 			<ReactFlow
 				nodes={initialNodes}
 				edges={initialEdges}
@@ -74,6 +75,12 @@ const FlowDiagram = () => {
 				zoomOnDoubleClick={false}
 				elementsSelectable={false}
 				preventScrolling={true}
+				multiSelectionKeyCode="Shift"
+				edgesUpdatable={false}
+				edgesFocusable={false}
+				nodesDraggable={false}
+				nodesConnectable={false}
+				nodesFocusable={false}
 			/>
 		</Box>
 	);
