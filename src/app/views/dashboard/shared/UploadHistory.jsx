@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import Chart from 'react-apexcharts';
 import moment from 'moment';
 import Loading from './../../../components/MatxLoading';
+import { Box } from '@mui/material';
 
 const MonthYear = () => {
 	// Generate the short month name and short year for the last 12 months
@@ -93,13 +94,13 @@ const UploadHistory = () => {
 	];
 
 	return (
-		<Fragment>
+		<Box width={'100%'}>
 			{history === undefined ? (
 				<Loading />
 			) : (
 				<Chart options={options} series={series} type="line" height={'450px'} />
 			)}
-		</Fragment>
+		</Box>
 	);
 };
 

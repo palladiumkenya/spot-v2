@@ -63,16 +63,20 @@ const IndicatorMetrics = () => {
 			bar: {
 				horizontal: false,
 				columnWidth: '75%',
+				dataLabels: {
+					position: 'top', // top, center, bottom
+				},
 			},
 		},
 		dataLabels: {
 			enabled: true,
-			enabledOnSeries: true,
 			formatter: function (val) {
 				return val;
 			},
+			offsetY: -20,
 			style: {
 				fontSize: '12px',
+				colors: ['#555555'],
 			},
 		},
 		xaxis: {
