@@ -22,12 +22,14 @@ const StyledLoading = styled('div')(() => ({
 
 const Loading = () => {
 	return (
-		<StyledLoading>
-			<Box position="flex">
+		<StyledLoading style={{ paddingTop: '20px', paddingBottom: '25px' }}>
+			<Box position="absolute">
 				<img
 					src="/assets/images/logo.png"
 					alt=""
-					style={{ filter: 'saturate(500%) contrast(800%) brightness(500%) invert(80%) sepia(50%) hue-rotate(120deg)' }}
+					style={{
+						filter: 'saturate(500%) contrast(800%) brightness(500%) invert(80%) sepia(50%) hue-rotate(120deg)',
+					}}
 				/>
 				<H6>Loading...</H6>
 				<CircularProgress className="circleProgress" />
