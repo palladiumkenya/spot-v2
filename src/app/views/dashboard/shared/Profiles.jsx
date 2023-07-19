@@ -62,14 +62,6 @@ const Profiles = () => {
 			},
 		},
 		{
-			name: 'county',
-			label: 'County',
-			options: {
-				filter: true,
-				sort: true,
-			},
-		},
-		{
 			name: 'subcounty',
 			label: 'Sub-County',
 			options: {
@@ -78,8 +70,28 @@ const Profiles = () => {
 			},
 		},
 		{
+			name: 'county',
+			label: 'County',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
 			name: 'partner',
 			label: 'Partner',
+			options: {
+				filter: true,
+				sort: true,
+				// Custom cell rendering function
+				customBodyRender: (value) => (
+					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
+				),
+			},
+		},
+		{
+			name: 'agency',
+			label: 'Agency',
 			options: {
 				filter: true,
 				sort: true,
@@ -134,8 +146,12 @@ const Profiles = () => {
 			name: 'updated',
 			label: 'Updated',
 			options: {
-				filter: true,
+				filter: false,
 				sort: true,
+				// Custom cell rendering function
+				customBodyRender: (value) => (
+					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
+				),
 			},
 		},
 		{
