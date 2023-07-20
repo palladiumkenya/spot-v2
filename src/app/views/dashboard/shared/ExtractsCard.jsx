@@ -64,7 +64,7 @@ const ExtractsCard = () => {
 								onChange={handleChange}
 								aria-label="basic tabs example"
 							>
-								<Tab label="NDWH" {...a11yProps(0)} />
+								<Tab label="C&T" {...a11yProps(0)} />
 								<Tab label="HTS" {...a11yProps(1)} />
 								<Tab label="MNCH" {...a11yProps(2)} />
 								<Tab label="PREP" {...a11yProps(3)} />
