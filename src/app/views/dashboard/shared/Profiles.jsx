@@ -2,6 +2,7 @@ import { Box, IconButton, styled, Tooltip } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import MUIDataTable from 'mui-datatables';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import useProfile from 'app/hooks/useProfiles';
@@ -30,6 +31,10 @@ const getProgressPerc = (ex, re) => {
 	return parseInt((re / ex) * 100);
 };
 
+const theme = createTheme({
+	overrides: {},
+});
+
 const Profiles = () => {
 	const { profiles } = useProfile();
 	const navigate = useNavigate();
@@ -47,6 +52,9 @@ const Profiles = () => {
 			options: {
 				filter: true,
 				sort: true,
+				setCellHeaderProps: () => ({
+					style: { width: '90px' },
+				}),
 			},
 		},
 		{
@@ -59,6 +67,9 @@ const Profiles = () => {
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '200px' },
+				}),
 			},
 		},
 		{
@@ -67,6 +78,9 @@ const Profiles = () => {
 			options: {
 				filter: true,
 				sort: true,
+				setCellHeaderProps: () => ({
+					style: { width: '150px' },
+				}),
 			},
 		},
 		{
@@ -75,6 +89,9 @@ const Profiles = () => {
 			options: {
 				filter: true,
 				sort: true,
+				setCellHeaderProps: () => ({
+					style: { width: '150px' },
+				}),
 			},
 		},
 		{
@@ -87,6 +104,9 @@ const Profiles = () => {
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '10%' },
+				}),
 			},
 		},
 		{
@@ -95,10 +115,12 @@ const Profiles = () => {
 			options: {
 				filter: true,
 				sort: true,
-				// Custom cell rendering function
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '90px' },
+				}),
 			},
 		},
 		{
@@ -107,6 +129,9 @@ const Profiles = () => {
 			options: {
 				filter: true,
 				sort: true,
+				setCellHeaderProps: (value) => ({
+					style: { width: '80px' },
+				}),
 			},
 		},
 		{
@@ -128,6 +153,9 @@ const Profiles = () => {
 						<span>{value}</span>
 					</Tooltip>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '10%' },
+				}),
 			},
 		},
 		{
@@ -140,6 +168,9 @@ const Profiles = () => {
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '11%' },
+				}),
 			},
 		},
 		{
@@ -152,6 +183,9 @@ const Profiles = () => {
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
+				setCellHeaderProps: () => ({
+					style: { width: '10%' },
+				}),
 			},
 		},
 		{
@@ -161,6 +195,9 @@ const Profiles = () => {
 				filter: false,
 				sort: false,
 				download: false,
+				setCellHeaderProps: (value) => ({
+					style: { width: '60px' },
+				}),
 			},
 		},
 	];
@@ -172,19 +209,22 @@ const Profiles = () => {
 				<AddIcon />
 			</StyledIconButton>
 		);
-		if (prof.totalExpected > prof.totalReceived) {
+		if (prof.totalExpected > prof.totalQueued) {
 			progress = (
 				<LinearProgressWithLabel
-					value={getProgressPerc(prof.totalExpected, prof.totalReceived)}
+					value={getProgressPerc(
+						prof.totalExpected * 2,
+						prof.totalReceived + prof.totalQueued
+					)}
 				/>
 			);
-		} else if (prof.totalQueued < prof.totalReceived) {
-			progress = (
-				<LinearProgressWithLabel
-					value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
-					color={'secondary'}
-				/>
-			);
+			// } else if (prof.totalQueued < prof.totalReceived) {
+			// 	progress = (
+			// 		<LinearProgressWithLabel
+			// 			value={getProgressPerc(prof.totalReceived, prof.totalQueued)}
+			// 			color={'secondary'}
+			// 		/>
+			// 	);
 		} else if (prof.totalQueued === prof.totalReceived) {
 			progress = (
 				<LinearProgressWithLabel
@@ -193,7 +233,7 @@ const Profiles = () => {
 				/>
 			);
 		}
-		let docket = prof?.docket === 'NDWH' ? 'C&T': prof?.docket
+		let docket = prof?.docket === 'NDWH' ? 'C&T' : prof?.docket;
 		return {
 			...prof,
 			progress,
@@ -218,8 +258,13 @@ const Profiles = () => {
 	};
 	return (
 		<Box>
-			{!!!profiles ? <Loading /> :
-			<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />}
+			{!!!profiles ? (
+				<Loading />
+			) : (
+				// <ThemeProvider theme={theme}>
+				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
+				// </ThemeProvider>
+			)}
 		</Box>
 	);
 };
