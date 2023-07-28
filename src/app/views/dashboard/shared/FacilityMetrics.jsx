@@ -1,5 +1,6 @@
 import { Box, styled, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import Loading from 'app/components/MatxLoading';
+import useFacilityMetrics from 'app/hooks/useFacilityMetrics';
 
 const StyledTable = styled(Table)(({ theme }) => ({
 	whiteSpace: 'pre',
@@ -35,9 +36,11 @@ const extractsList = [
 ];
 
 const FacilityMetrics = () => {
+	const { metrics } = useFacilityMetrics();
+	console.log(metrics);
 	return (
 		<Box width="100%" overflow="auto">
-			{extractsList === undefined ? (
+			{metrics === undefined ? (
 				<Loading />
 			) : (
 				<StyledTable>
@@ -50,11 +53,11 @@ const FacilityMetrics = () => {
 					</TableHead>
 
 					<TableBody>
-						{extractsList.map((extract, index) => (
+						{metrics.map((extract, index) => (
 							<TableRow key={index}>
 								<TableCell align="left">{extract.metric}</TableCell>
 								<TableCell align="center">{extract.value}</TableCell>
-								<TableCell align="center">{extract.description}</TableCell>
+								<TableCell align="center">{extract.metric}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

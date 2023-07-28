@@ -14,6 +14,7 @@ import { FacilityProvider } from 'app/contexts/FacilityContext';
 import { IndicatorMetricsProvider } from 'app/contexts/IndicatorMetricsContext';
 import { ManifestProvider } from './../../contexts/ExtractsContext';
 import { UploadHistoryProvider } from 'app/contexts/UploadHistoryContext';
+import { FacilityMetricsProvider } from 'app/contexts/FacilityMetricsContext';
 
 const Details = ({ updateCode }) => {
 	const { param } = useParams();
@@ -51,7 +52,9 @@ const Details = ({ updateCode }) => {
 				</Grid>
 				<Grid item xs={12} md={12} xl={4}>
 					<SimpleCard title={'Facility Metrics'}>
-						<FacilityMetrics />
+						<FacilityMetricsProvider>
+							<FacilityMetrics />
+						</FacilityMetricsProvider>
 					</SimpleCard>
 				</Grid>
 			</Grid>
