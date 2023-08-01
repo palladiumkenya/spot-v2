@@ -45,7 +45,7 @@ const UploadHistory = () => {
 	const { history } = useUploadHistory();
 	const last12Months = MonthYear();
 
-	const groupedDataByDocket = history?.reduce((result, item) => {
+	const groupedDataByDocket = history?.filter((item) => item.received)?.reduce((result, item) => {
 		const { received, log_date, docket } = item;
 		if (!result[docket]) {
 			result[docket] = {
