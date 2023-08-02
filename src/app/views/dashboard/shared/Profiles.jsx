@@ -31,9 +31,6 @@ const getProgressPerc = (ex, re) => {
 	return parseInt((re / ex) * 100);
 };
 
-const theme = createTheme({
-	overrides: {},
-});
 
 const Profiles = () => {
 	const { profiles } = useProfile();
@@ -258,13 +255,7 @@ const Profiles = () => {
 	};
 	return (
 		<Box>
-			{!!!profiles ? (
-				<Loading />
-			) : (
-				// <ThemeProvider theme={theme}>
-				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
-				// </ThemeProvider>
-			)}
+			{profiles ? <MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} /> : <Loading />}
 		</Box>
 	);
 };

@@ -27,7 +27,7 @@ let ChartArray = (data, dates) => {
 		return result;
 	}, {});
 
-	const latestValues = dates.map((monthYear) => {
+	return dates.map((monthYear) => {
 		const dataForMonth = groupedData[monthYear];
 		if (dataForMonth) {
 			const latestData = dataForMonth.reduce((latest, item) => {
@@ -37,8 +37,6 @@ let ChartArray = (data, dates) => {
 		}
 		return null;
 	});
-
-	return latestValues;
 };
 
 const UploadHistory = () => {
