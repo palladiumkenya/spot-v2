@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Copy the .env file into the container
-COPY .env .env
+COPY .env.production .env.production
 
 # Build the React app
 RUN npm run build
