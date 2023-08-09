@@ -31,31 +31,35 @@ const Details = ({ updateCode }) => {
 				</Grid>
 				{/* </ContentBox>
 				<ContentBox className="analytics"> */}
-				<Grid item xs={12} md={6} xl={8}>
-					<ManifestProvider>
-						<ExtractsCard code={param} />
-					</ManifestProvider>
-				</Grid>
-				<Grid item xs={12} md={6} xl={4}>
-					<SimpleCard title={'Upload History'}>
-						<UploadHistoryProvider>
-							<UploadHistory />
-						</UploadHistoryProvider>
-					</SimpleCard>
-				</Grid>
 				<Grid item xs={12} md={12} xl={8}>
-					<SimpleCard title={'Indicator Metrics'}>
-						<IndicatorMetricsProvider>
-							<IndicatorMetrics />
-						</IndicatorMetricsProvider>
-					</SimpleCard>
+					<Grid item xs={12} md={12} xl={12}>
+						<ManifestProvider>
+							<ExtractsCard code={param} />
+						</ManifestProvider>
+					</Grid>
+					<Grid item xs={12} md={12} xl={12}>
+						<SimpleCard title={'Indicator Metrics'}>
+							<IndicatorMetricsProvider>
+								<IndicatorMetrics />
+							</IndicatorMetricsProvider>
+						</SimpleCard>
+					</Grid>
 				</Grid>
 				<Grid item xs={12} md={12} xl={4}>
-					<SimpleCard title={'Facility Metrics'}>
-						<FacilityMetricsProvider>
-							<FacilityMetrics />
-						</FacilityMetricsProvider>
-					</SimpleCard>
+					<Grid item xs={12} md={12} xl={12}>
+						<SimpleCard title={'Upload History'}>
+							<UploadHistoryProvider>
+								<UploadHistory />
+							</UploadHistoryProvider>
+						</SimpleCard>
+					</Grid>
+					<Grid item xs={12} md={12} xl={12}>
+						<SimpleCard title={'Facility Metrics'}>
+							<FacilityMetricsProvider>
+								<FacilityMetrics />
+							</FacilityMetricsProvider>
+						</SimpleCard>
+					</Grid>
 				</Grid>
 			</Grid>
 		</Fragment>
