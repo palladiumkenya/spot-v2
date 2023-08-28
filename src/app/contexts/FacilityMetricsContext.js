@@ -21,9 +21,9 @@ const FacilityMetricsContext = createContext({
 export const FacilityMetricsProvider = ({ settings, children }) => {
 	const [state, dispatch] = useReducer(reducer, []);
 
-	const getFacilityMetrics = async (code) => {
+	const getFacilityMetrics = async () => {
 		try {
-			code = Store.getState().reducers.code ?? '';
+			let code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`metrics/${code}`);
 			dispatch({
 				type: 'LOAD_FACILITY_METRICS_INFO',

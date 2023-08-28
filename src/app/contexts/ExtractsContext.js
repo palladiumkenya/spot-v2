@@ -23,7 +23,7 @@ export const ManifestProvider = ({ settings, children }) => {
 
 	const getManifests = async () => {
 		try {
-			code = Store.getState().reducers.code ?? '';
+			let code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`manifests/${code}`);
 			dispatch({
 				type: 'LOAD_EXTRACTS',

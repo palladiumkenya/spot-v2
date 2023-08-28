@@ -21,9 +21,9 @@ const FacilityContext = createContext({
 export const FacilityProvider = ({ settings, children }) => {
 	const [state, dispatch] = useReducer(reducer, []);
 
-	const getFacility = async (code) => {
+	const getFacility = async () => {
 		try {
-			code = Store.getState().reducers.code ?? '';
+			let code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`facilities/${code}`);
 			dispatch({
 				type: 'LOAD_FACILITY_INFO',

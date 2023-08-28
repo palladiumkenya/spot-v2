@@ -44,17 +44,17 @@ const Extracts = ({ list = {} }) => {
 	list = list?.documents
 		?.filter((doc) => doc.expected !== null)
 		?.map((ex) => {
-			let progress = <LinearProgressWithLabel color="error" value={44} />;
+			let progress = <LinearProgressWithLabel />;
 			let tooltip = '';
 			if (ex.queued === ex.expected) {
 				progress = (
 					<LinearProgressWithLabel
-						value={getProgressPerc(ex.received, ex.queued)}
+						value={getProgressPerc(ex.expected, ex.queued)}
 						color={'success'}
 					/>
 				);
 				tooltip = `Queued: ${ex.queued}/ Expected: ${ex.expected}`;
-			} else if (ex.expected > ex.received && ex.queued === 0) {
+			} else if (ex.expected > ex.received && ex.queued >= 0) {
 				progress = (
 					<LinearProgressWithLabel value={getProgressPerc(ex.expected, ex.received)} />
 				);

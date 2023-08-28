@@ -18,12 +18,12 @@ const UploadHistoryContext = createContext({
 	getHistory: () => {},
 });
 
-export const UploadHistoryProvider = ({ settings, children }) => {
+export const UploadHistoryProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, []);
 
-	const getHistory = async (code) => {
+	const getHistory = async () => {
 		try {
-			code = Store.getState().reducers.code ?? '';
+			let code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`manifests/history/${code}`);
 			dispatch({
 				type: 'LOAD_HISTORY',

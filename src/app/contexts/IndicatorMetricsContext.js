@@ -21,9 +21,9 @@ const IndicatorMetricsContext = createContext({
 export const IndicatorMetricsProvider = ({ settings, children }) => {
 	const [state, dispatch] = useReducer(reducer, []);
 
-	const getIndicatorMetrics = async (code) => {
+	const getIndicatorMetrics = async () => {
 		try {
-			code = Store.getState().reducers.code ?? '';
+			let code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`indicators/${code}`);
 			dispatch({
 				type: 'LOAD_INDICATOR_METRICS',
