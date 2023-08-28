@@ -47,17 +47,17 @@ const Details = ({ updateCode }) => {
 				</Grid>
 				<Grid item xs={12} md={12} xl={4}>
 					<Grid item xs={12} md={12} xl={12}>
-						<SimpleCard title={'Upload History'}>
-							<UploadHistoryProvider>
-								<UploadHistory />
-							</UploadHistoryProvider>
-						</SimpleCard>
-					</Grid>
-					<Grid item xs={12} md={12} xl={12}>
 						<SimpleCard title={'Facility Metrics'}>
 							<FacilityMetricsProvider>
 								<FacilityMetrics />
 							</FacilityMetricsProvider>
+						</SimpleCard>
+					</Grid>
+					<Grid item xs={12} md={12} xl={12}>
+						<SimpleCard title={'Upload History'}>
+							<UploadHistoryProvider>
+								<UploadHistory />
+							</UploadHistoryProvider>
 						</SimpleCard>
 					</Grid>
 				</Grid>

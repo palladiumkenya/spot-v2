@@ -5,6 +5,8 @@ import RefreshAlert from './shared/RefreshAlert';
 import { NotificationProvider } from 'app/contexts/NotificationContext';
 import { ProfileProvider } from './../../contexts/ProfileContext';
 import Profiles from './shared/Profiles';
+import SimpleCard from './../../components/SimpleCard';
+import FlowDiagram from 'app/components/FlowDiagram';
 
 const ContentBox = styled('div')(({ theme }) => ({
 	margin: '30px',
@@ -21,7 +23,10 @@ const Analytics = () => {
 				<ProfileProvider>
 					<Profiles />
 				</ProfileProvider>
-				<Legend />
+				<SimpleCard title={"Legend"}>
+					<Legend />
+					<FlowDiagram/>
+				</SimpleCard>
 			</ContentBox>
 		</Fragment>
 	);

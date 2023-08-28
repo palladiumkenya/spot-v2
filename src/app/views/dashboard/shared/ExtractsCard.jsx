@@ -9,6 +9,7 @@ import { SimpleCard } from 'app/components';
 import Legend from 'app/components/Legend';
 import useExtracts from 'app/hooks/useExtracts';
 import Loading from 'app/components/MatxLoading';
+import FlowDiagram from './../../../components/FlowDiagram';
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
@@ -59,6 +60,7 @@ const ExtractsCard = () => {
 				) : (
 					<>
 						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+							<Legend />
 							<Tabs
 								value={value}
 								onChange={handleChange}
@@ -82,10 +84,10 @@ const ExtractsCard = () => {
 						<TabPanel value={value} index={3}>
 							<Extracts list={manifests?.find((x) => x.docket === 'PREP')} />
 						</TabPanel>
+						<FlowDiagram />
 					</>
 				)}
 			</Box>
-			<Legend />
 		</SimpleCard>
 	);
 };

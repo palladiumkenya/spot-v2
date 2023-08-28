@@ -21,7 +21,7 @@ const ExtractContext = createContext({
 export const ManifestProvider = ({ settings, children }) => {
 	const [state, dispatch] = useReducer(reducer, []);
 
-	const getManifests = async (code) => {
+	const getManifests = async () => {
 		try {
 			code = Store.getState().reducers.code ?? '';
 			const res = await axios.get(`manifests/${code}`);

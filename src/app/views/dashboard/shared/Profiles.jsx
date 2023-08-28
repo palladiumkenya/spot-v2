@@ -2,7 +2,6 @@ import { Box, IconButton, styled, Tooltip } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import MUIDataTable from 'mui-datatables';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import useProfile from 'app/hooks/useProfiles';
