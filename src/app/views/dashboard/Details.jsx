@@ -37,13 +37,6 @@ const Details = ({ updateCode }) => {
 							<ExtractsCard code={param} />
 						</ManifestProvider>
 					</Grid>
-					<Grid item xs={12} md={12} xl={12}>
-						<SimpleCard title={'Indicator Metrics'}>
-							<IndicatorMetricsProvider>
-								<IndicatorMetrics />
-							</IndicatorMetricsProvider>
-						</SimpleCard>
-					</Grid>
 				</Grid>
 				<Grid item xs={12} md={12} xl={4}>
 					<Grid item xs={12} md={12} xl={12}>
@@ -60,6 +53,13 @@ const Details = ({ updateCode }) => {
 							</UploadHistoryProvider>
 						</SimpleCard>
 					</Grid>
+				</Grid>
+				<Grid item xs={12} md={12} xl={12}>
+					<SimpleCard title={'Indicator Metrics'}>
+						<IndicatorMetricsProvider>
+							<IndicatorMetrics />
+						</IndicatorMetricsProvider>
+					</SimpleCard>
 				</Grid>
 			</Grid>
 		</Fragment>

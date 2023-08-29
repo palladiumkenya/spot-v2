@@ -1,27 +1,26 @@
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import Loading from 'app/components/MatxLoading';
 import useIndicatorMetrics from 'app/hooks/useIndicatorMetrics';
-import Chart from 'react-apexcharts';
+import IndicatorMetricChart from './IndicatorMetricChart';
 
 // This function rearranges the data
 const rearrangeData = (data, order) => {
-	let rearrangedData = {
-		dwh_values: [],
-		emr_values: [],
-		names: [],
-		dwh_dates: [],
-		emr_dates: [],
-	};
+	let rearrangedData = [];
 
 	order.forEach((item) => {
-		let name = typeof item === 'string' ? item : item[0];
+		let name = typeof item.name === 'string' ? item.name : item[0]?.name;
 		let index = data?.names.indexOf(name);
+		let dataObject = {};
 
-		rearrangedData.dwh_values.push(index !== -1 ? data?.dwh_values[index] : null);
-		rearrangedData.emr_values.push(index !== -1 ? data?.emr_values[index] : null);
-		rearrangedData.names.push(name);
-		rearrangedData.dwh_dates.push(index !== -1 ? data?.dwh_dates[index] : null);
-		rearrangedData.emr_dates.push(index !== -1 ? data?.emr_dates[index] : null);
+		dataObject.dwh_values = index !== -1 ? data?.dwh_values[index] : null;
+		dataObject.emr_values = index !== -1 ? data?.emr_values[index] : null;
+		dataObject.names = name;
+		dataObject.defn = item.defn;
+		dataObject.dwh_dates =
+			index !== -1 ? new Date(data?.dwh_dates[index]).toDateString() : null;
+		dataObject.emr_dates =
+			index !== -1 ? new Date(data?.emr_dates[index]).toDateString() : null;
+		rearrangedData.push(dataObject);
 	});
 
 	return rearrangedData;
@@ -31,102 +30,54 @@ const IndicatorMetrics = () => {
 	const { metrics } = useIndicatorMetrics();
 
 	let order = [
-		'HTS_TESTED',
-		'HTS_TESTED_POS',
-		'HTS_INDEX',
-		'HTS_INDEX_POS',
-		'TX_NEW',
-		'TX_CURR',
-		'RETENTION_ON_ART_12_MONTHS',
-		'RETENTION_ON_ART_VL_1000_12_MONTHS',
+		{
+			name: 'HTS_TESTED',
+			defn: 'Individuals who received a HIV test. Computation : Count of all individuals who received HIV Testing Services (HTS) and received their test results in a given month',
+		},
+		{
+			name: 'HTS_TESTED_POS',
+			defn: 'Individuals who tested positive during a HIV test. Computation: Count of all individuals with a positive in a given month',
+		},
+		{
+			name: 'HTS_INDEX',
+			defn: 'Individuals who were identified and tested using Index Testing Services (PNS or contact tracing) and received their results. Computation: Count of all individuals identified and tested using Index Testing Services in a given month',
+		},
+		{
+			name: 'HTS_INDEX_POS',
+			defn: '	Individuals who tested positive using Index Testing Services (PNS or contact tracing) and received their results . Computation: Count of individuals who tested positive using Index Testing Services in a given month',
+		},
+		{
+			name: 'TX_NEW',
+			defn: 'Individuals newly enrolled on antiretroviral therapy (ART). Computation: Count of individuals newly initiated on ART in a given month',
+		},
+		{
+			name: 'TX_CURR',
+			defn: 'Individuals currently receiving antiretroviral therapy (ART). Computation: Count of individuals receiving ART as at end of a given month',
+		},
+		{
+			name: 'RETENTION_ON_ART_12_MONTHS',
+			defn: 'Individuals who are still alive and on ART 12 months after initiating treatment. : Count individuals newly initiated on ART 12 months prior',
+		},
+		{
+			name: 'RETENTION_ON_ART_VL_1000_12_MONTHS',
+			defn: 'Individuals who are suppressed 12 months after initiating treatment. Computation: Count individuals who initiated ART are virally suppressed 12 months after initiating ART',
+		},
 	];
 
 	let rearrangedData = rearrangeData(metrics, order);
 
-	let series = [
-		{
-			name: 'EMR',
-			type: 'bar',
-			data: rearrangedData?.emr_values,
-		},
-		{
-			name: 'DWH',
-			type: 'bar',
-			data: rearrangedData?.dwh_values ?? [],
-		},
-	];
-	let options = {
-		chart: {
-			type: 'bar',
-		},
-		plotOptions: {
-			bar: {
-				horizontal: false,
-				columnWidth: '75%',
-				dataLabels: {
-					position: 'top', // top, center, bottom
-				},
-			},
-		},
-		dataLabels: {
-			enabled: true,
-			formatter: function (val) {
-				return val;
-			},
-			offsetY: -20,
-			style: {
-				fontSize: '12px',
-				colors: ['#555555'],
-			},
-		},
-		xaxis: {
-			categories: [
-				'HTS TESTED',
-				['HTS TESTED', 'POS'],
-				'HTS INDEX',
-				['HTS INDEX', 'POS'],
-				'TX NEW',
-				'TX CURR',
-				['RETENTION', 'ON ART', '12 MONTHS'],
-				['RETENTION', 'ON ART VL', '1000 12 MONTHS'],
-			],
-			labels: {
-				rotate: 0,
-			},
-		},
-		yaxis: {
-			title: {
-				text: 'NUMBER OF PATIENTS',
-			},
-		},
-		fill: {
-			opacity: 1,
-		},
-		responsive: [
-			{
-				breakpoint: undefined,
-				options: {},
-			},
-		],
-		tooltip: {
-			shared: true,
-			intersect: false,
-			y: {
-				formatter: function (val) {
-					return val;
-				},
-			},
-		},
-	};
-
 	return (
-		<Box width="100%">
+		<Grid container spacing={3} alignItems="flex-start">
 			{metrics === undefined ? (
 				<Loading />
 			) : (
-				<Chart options={options} series={series} type="bar" width="100%" />
+				rearrangedData.map((item) => (
+					<Grid item xs={12} md={3}>
+						<IndicatorMetricChart key={item.names} data={item} />
+					</Grid>
+				))
 			)}
-		</Box>
+		</Grid>
 	);
 };
 
