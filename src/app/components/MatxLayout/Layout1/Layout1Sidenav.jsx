@@ -6,7 +6,6 @@ import { sidenavCompactWidth, sideNavWidth } from 'app/utils/constant';
 import { convertHexToRGB } from 'app/utils/utils';
 import React from 'react';
 import Brand from '../../Brand';
-import Sidenav from '../../Sidenav';
 
 const SidebarNavRoot = styled(Box)(({ theme, width, primaryBg, bgImgURL }) => ({
   position: 'fixed',
@@ -90,7 +89,6 @@ const Layout1Sidenav = () => {
             />
           </Hidden>
         </Brand>
-        <Sidenav />
       </NavListBox>
     </SidebarNavRoot>
   );

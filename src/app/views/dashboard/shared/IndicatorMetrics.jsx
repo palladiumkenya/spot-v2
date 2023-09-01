@@ -56,7 +56,7 @@ const IndicatorMetrics = () => {
 		},
 		{
 			name: 'RETENTION_ON_ART_12_MONTHS',
-			defn: 'Individuals who are still alive and on ART 12 months after initiating treatment. : Count individuals newly initiated on ART 12 months prior',
+			defn: 'Individuals who are still alive and on ART 12 months after initiating treatment. Computation: Count individuals newly initiated on ART 12 months prior',
 		},
 		{
 			name: 'RETENTION_ON_ART_VL_1000_12_MONTHS',
@@ -72,7 +72,7 @@ const IndicatorMetrics = () => {
 				<Loading />
 			) : (
 				rearrangedData.map((item) => (
-					<Grid item xs={12} md={3}>
+					<Grid item xs={12} md={6} xl={3}>
 						<IndicatorMetricChart key={item.names} data={item} />
 					</Grid>
 				))

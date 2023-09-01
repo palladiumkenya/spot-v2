@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import useProfile from 'app/hooks/useProfiles';
 import Loading from 'app/components/MatxLoading';
+import moment from 'moment';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
 	color: theme.palette.text.primary,
@@ -29,7 +30,6 @@ const LinearProgressWithLabel = (props) => {
 const getProgressPerc = (ex, re) => {
 	return parseInt((re / ex) * 100);
 };
-
 
 const Profiles = () => {
 	const { profiles } = useProfile();
@@ -175,7 +175,6 @@ const Profiles = () => {
 			options: {
 				filter: false,
 				sort: true,
-				// Custom cell rendering function
 				customBodyRender: (value) => (
 					<div style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{value}</div>
 				),
@@ -194,6 +193,35 @@ const Profiles = () => {
 				setCellHeaderProps: (value) => ({
 					style: { width: '60px' },
 				}),
+			},
+		},
+		// CSV only columns start here
+		{
+			name: 'dwapi_version',
+			label: 'DWAPI Version',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_etl_date',
+			label: 'EMR ETL Date',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'log_date',
+			label: 'Last Load Date',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'upload_mode',
+			label: 'Upload Mode',
+			options: {
+				display: false,
 			},
 		},
 	];
@@ -243,6 +271,7 @@ const Profiles = () => {
 		filterType: 'multiselect',
 		selectableRows: 'none',
 		downloadOptions: {
+			filename: `download ${moment().format("MMM Do YY")}.csv`,
 			filterOptions: {
 				useDisplayedColumnsOnly: false,
 				useDisplayedRowsOnly: true,
@@ -254,7 +283,11 @@ const Profiles = () => {
 	};
 	return (
 		<Box>
-			{profiles ? <MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} /> : <Loading />}
+			{profiles ? (
+				<MUIDataTable title={'Profiles'} data={data} columns={columns} options={options} />
+			) : (
+				<Loading />
+			)}
 		</Box>
 	);
 };

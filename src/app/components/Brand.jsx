@@ -18,7 +18,7 @@ const StyledSpan = styled(Span)(({ mode }) => ({
 
 const Brand = ({ children }) => {
   const { settings } = useSettings();
-  const leftSidebar = settings.layout1Settings.leftSidebar;
+  const {leftSidebar} = settings.layout1Settings;
   const { mode } = leftSidebar;
 
   return (
@@ -26,7 +26,7 @@ const Brand = ({ children }) => {
       <Box display="flex" alignItems="center">
         <MatxLogo />
         <StyledSpan mode={mode} className="sidenavHoverShow">
-          Matx
+          SPOT
         </StyledSpan>
       </Box>
 
