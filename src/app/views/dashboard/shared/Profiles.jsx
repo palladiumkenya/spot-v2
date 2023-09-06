@@ -311,18 +311,18 @@ const Profiles = () => {
 			progress,
 			docket,
 			updated: new Date(prof.updated).toLocaleString(), // Standardize date format
-			log_date: prof.log_date ? new Date(prof.log_date).toLocaleString() : '', // Standardize date format
+			log_date: prof?.log_date ? new Date(prof.log_date).toLocaleString() : '', // Standardize date format
 			action,
-			emr_TXCURR: prof.indicator_metrics.TX_CURR,
-			emr_HTS_INDEX: prof.indicator_metrics.HTS_INDEX,
-			emr_HTS_TESTED_POS: prof.indicator_metrics.HTS_TESTED_POS,
-			emr_RETENTION_ON_ART_12_MONTHS: prof.indicator_metrics.RETENTION_ON_ART_12_MONTHS,
+			emr_TXCURR: prof.indicator_metrics?.TX_CURR,
+			emr_HTS_INDEX: prof.indicator_metrics?.HTS_INDEX,
+			emr_HTS_TESTED_POS: prof.indicator_metrics?.HTS_TESTED_POS,
+			emr_RETENTION_ON_ART_12_MONTHS: prof.indicator_metrics?.RETENTION_ON_ART_12_MONTHS,
 			emr_RETENTION_ON_ART_VL_1000_12_MONTHS:
-				prof.indicator_metrics.RETENTION_ON_ART_VL_1000_12_MONTHS,
-			emr_HTS_TESTED: prof.indicator_metrics.HTS_TESTED,
-			emr_TX_NEW: prof.indicator_metrics.TX_NEW,
-			EMR_ETL_Refresh: prof.indicator_metrics.EMR_ETL_Refresh
-				? new Date(prof.indicator_metrics.EMR_ETL_Refresh).toLocaleString()
+				prof.indicator_metrics?.RETENTION_ON_ART_VL_1000_12_MONTHS,
+			emr_HTS_TESTED: prof.indicator_metrics?.HTS_TESTED,
+			emr_TX_NEW: prof.indicator_metrics?.TX_NEW,
+			EMR_ETL_Refresh: prof.indicator_metrics?.EMR_ETL_Refresh
+				? new Date(prof.indicator_metrics?.EMR_ETL_Refresh).toLocaleString()
 				: '', // Standardize date format
 		};
 	});
