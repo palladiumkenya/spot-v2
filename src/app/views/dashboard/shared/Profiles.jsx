@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import useProfile from 'app/hooks/useProfiles';
 import Loading from 'app/components/MatxLoading';
-import moment from 'moment';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
 	color: theme.palette.text.primary,
@@ -185,7 +184,7 @@ const Profiles = () => {
 		},
 		{
 			name: 'action',
-			label: '',
+			label: 'Action',
 			options: {
 				filter: false,
 				sort: false,
@@ -204,7 +203,7 @@ const Profiles = () => {
 			},
 		},
 		{
-			name: 'emr_etl_date',
+			name: 'EMR_ETL_Refresh',
 			label: 'EMR ETL Date',
 			options: {
 				display: false,
@@ -220,6 +219,55 @@ const Profiles = () => {
 		{
 			name: 'upload_mode',
 			label: 'Upload Mode',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_TXCURR',
+			label: 'EMR TXCURR',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_TX_NEW',
+			label: 'EMR TX_NEW',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_HTS_TESTED',
+			label: 'EMR HTS_TESTED',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_HTS_TESTED_POS',
+			label: 'EMR HTS_TESTED_POS',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_HTS_INDEX',
+			label: 'EMR HTS_INDEX',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_RETENTION_ON_ART_12_MONTHS',
+			label: 'EMR RETENTION_ON_ART_12_MONTHS',
+			options: {
+				display: false,
+			},
+		},
+		{
+			name: 'emr_RETENTION_ON_ART_VL_1000_12_MONTHS',
+			label: 'EMR RETENTION_ON_ART_VL_1000_12_MONTHS',
 			options: {
 				display: false,
 			},
@@ -262,8 +310,20 @@ const Profiles = () => {
 			...prof,
 			progress,
 			docket,
-			updated: new Date(prof.updated).toLocaleString(),
+			updated: new Date(prof.updated).toLocaleString(), // Standardize date format
+			log_date: prof.log_date ? new Date(prof.log_date).toLocaleString() : '', // Standardize date format
 			action,
+			emr_TXCURR: prof.indicator_metrics.TX_CURR,
+			emr_HTS_INDEX: prof.indicator_metrics.HTS_INDEX,
+			emr_HTS_TESTED_POS: prof.indicator_metrics.HTS_TESTED_POS,
+			emr_RETENTION_ON_ART_12_MONTHS: prof.indicator_metrics.RETENTION_ON_ART_12_MONTHS,
+			emr_RETENTION_ON_ART_VL_1000_12_MONTHS:
+				prof.indicator_metrics.RETENTION_ON_ART_VL_1000_12_MONTHS,
+			emr_HTS_TESTED: prof.indicator_metrics.HTS_TESTED,
+			emr_TX_NEW: prof.indicator_metrics.TX_NEW,
+			EMR_ETL_Refresh: prof.indicator_metrics.EMR_ETL_Refresh
+				? new Date(prof.indicator_metrics.EMR_ETL_Refresh).toLocaleString()
+				: '', // Standardize date format
 		};
 	});
 
@@ -271,7 +331,7 @@ const Profiles = () => {
 		filterType: 'multiselect',
 		selectableRows: 'none',
 		downloadOptions: {
-			filename: `download ${moment().format("MMM Do YY")}.csv`,
+			filename: `download ${new Date().toLocaleString()}.csv`,
 			filterOptions: {
 				useDisplayedColumnsOnly: false,
 				useDisplayedRowsOnly: true,
