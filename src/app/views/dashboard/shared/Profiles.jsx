@@ -200,6 +200,7 @@ const Profiles = () => {
 			label: 'DWAPI Version',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -207,6 +208,7 @@ const Profiles = () => {
 			label: 'EMR ETL Date',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -214,6 +216,7 @@ const Profiles = () => {
 			label: 'Last Load Date',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -221,6 +224,7 @@ const Profiles = () => {
 			label: 'Upload Mode',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -228,6 +232,7 @@ const Profiles = () => {
 			label: 'EMR TXCURR',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -235,6 +240,7 @@ const Profiles = () => {
 			label: 'EMR TX_NEW',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -242,6 +248,7 @@ const Profiles = () => {
 			label: 'EMR HTS_TESTED',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -249,6 +256,7 @@ const Profiles = () => {
 			label: 'EMR HTS_TESTED_POS',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -256,6 +264,7 @@ const Profiles = () => {
 			label: 'EMR HTS_INDEX',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -263,6 +272,7 @@ const Profiles = () => {
 			label: 'EMR RETENTION_ON_ART_12_MONTHS',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 		{
@@ -270,6 +280,7 @@ const Profiles = () => {
 			label: 'EMR RETENTION_ON_ART_VL_1000_12_MONTHS',
 			options: {
 				display: false,
+				filter: false,
 			},
 		},
 	];
@@ -329,6 +340,7 @@ const Profiles = () => {
 
 	const options = {
 		filterType: 'multiselect',
+		search: true,
 		selectableRows: 'none',
 		downloadOptions: {
 			filename: `download ${new Date().toLocaleString()}.csv`,
