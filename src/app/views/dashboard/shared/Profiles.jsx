@@ -292,7 +292,7 @@ const Profiles = () => {
 				<AddIcon />
 			</StyledIconButton>
 		);
-		if (prof.totalExpected > prof.totalQueued) {
+		if (prof.totalExpected > prof.totalQueued || prof.totalExpected > prof.totalReceived) {
 			progress = (
 				<LinearProgressWithLabel
 					value={getProgressPerc(
