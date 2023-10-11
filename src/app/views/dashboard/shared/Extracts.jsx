@@ -46,7 +46,12 @@ const Extracts = ({ list = {} }) => {
 		?.map((ex) => {
 			let progress = <LinearProgressWithLabel />;
 			let tooltip = '';
-			if (ex.queued === ex.expected) {
+			if (ex.expected > ex.received && ex.queued >= 0) {
+				progress = (
+					<LinearProgressWithLabel value={getProgressPerc(ex.expected, ex.received)} />
+				);
+				tooltip = `Received: ${ex.received}/ Expected: ${ex.expected}`;
+			} else if (ex.queued === ex.expected) {
 				progress = (
 					<LinearProgressWithLabel
 						value={getProgressPerc(ex.expected, ex.queued)}
@@ -54,11 +59,6 @@ const Extracts = ({ list = {} }) => {
 					/>
 				);
 				tooltip = `Queued: ${ex.queued}/ Expected: ${ex.expected}`;
-			} else if (ex.expected > ex.received && ex.queued >= 0) {
-				progress = (
-					<LinearProgressWithLabel value={getProgressPerc(ex.expected, ex.received)} />
-				);
-				tooltip = `Received: ${ex.received}/ Expected: ${ex.expected}`;
 			} else if (ex.queued < ex.received) {
 				progress = (
 					<LinearProgressWithLabel
