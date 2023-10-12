@@ -42,7 +42,7 @@ const getProgressPerc = (ex, re) => {
 
 const Extracts = ({ list = {} }) => {
 	list = list?.documents
-		?.filter((doc) => doc.expected !== null)
+		?.filter((doc) => doc.expected !== null && doc.expected > 0)
 		?.map((ex) => {
 			let progress = <LinearProgressWithLabel />;
 			let tooltip = '';
