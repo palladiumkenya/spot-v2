@@ -51,6 +51,22 @@ const Extracts = ({ list = {} }) => {
 					<LinearProgressWithLabel value={getProgressPerc(ex.expected, ex.received)} />
 				);
 				tooltip = `Received: ${ex.received}/ Expected: ${ex.expected}`;
+			} else if (ex.received > ex.expected) {
+				progress = (
+					<LinearProgressWithLabel
+						value={getProgressPerc(ex.expected, ex.received)}
+						color={'error'}
+					/>
+				);
+				tooltip = `Received: ${ex.queued}/ Expected: ${ex.expected}`;
+			} else if (ex.queued > ex.expected) {
+				progress = (
+					<LinearProgressWithLabel
+						value={getProgressPerc(ex.expected, ex.queued)}
+						color={'error'}
+					/>
+				);
+				tooltip = `Queued: ${ex.queued}/ Expected: ${ex.expected}`;
 			} else if (ex.queued === ex.expected) {
 				progress = (
 					<LinearProgressWithLabel

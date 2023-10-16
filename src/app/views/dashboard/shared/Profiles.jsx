@@ -287,6 +287,7 @@ const Profiles = () => {
 
 	let data = profiles?.map((prof) => {
 		let progress = <LinearProgressWithLabel value={0} />;
+		let status = prof.status
 		let action = (
 			<StyledIconButton onClick={() => handleClick(prof.mfl_code)}>
 				<AddIcon />
@@ -308,6 +309,17 @@ const Profiles = () => {
 			// 			color={'secondary'}
 			// 		/>
 			// 	);
+		} else if (prof.totalQueued > prof.totalExpected || prof.totalReceived > prof.totalExpected) {
+			progress = (
+				<LinearProgressWithLabel
+					value={getProgressPerc(
+						prof.totalExpected * 2,
+						prof.totalReceived + prof.totalQueued
+					)}
+					color={'error'}
+				/>
+			);
+			status = 'Error in 1 or more Extracts'
 		} else if (prof.totalQueued === prof.totalReceived) {
 			progress = (
 				<LinearProgressWithLabel
@@ -320,6 +332,7 @@ const Profiles = () => {
 		return {
 			...prof,
 			progress,
+			status,
 			docket,
 			updated: new Date(prof.updated).toLocaleString(), // Standardize date format
 			log_date: prof?.log_date ? new Date(prof.log_date).toLocaleString() : '', // Standardize date format
